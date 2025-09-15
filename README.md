@@ -96,3 +96,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Variables de entorno
+Para ejecutar la aplicación necesitas crear un archivo `.env` en la raíz del proyecto siguiendo la estructura de `.env.example`. 
+En el archivo debes indicar las volares adecuados para hacer funcionar la aplicaión en tu entorno local.

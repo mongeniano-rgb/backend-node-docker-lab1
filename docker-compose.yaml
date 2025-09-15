@@ -1,0 +1,43 @@
+name: miapp
+services:
+  db:
+    image: mysql:9.4.0
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    #env_file:
+    #  - ./secret.txt
+    deploy:
+      resources:
+        limits:
+          cpus: "6"
+          memory: "512M"
+        reservations:
+          cpus: "2"
+          memory: "256M"
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: ${DB_HOST}  
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD} 
+      DB_NAME: ${DB_NAME}
+    ports:
+      - "3000:4000" 
+    #env_file:
+    #  - ./secret.txt
+volumes:
+  db_data: 
